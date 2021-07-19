@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts 
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!-- config file for the Struts 2.0 Hello World Tutorial -->
+<struts>
+ <constant name="struts.action.excludePattern" value="/websocket*,^ws://.$"/>
+    <package name="controllers" namespace="/"  extends="struts-default">
+        <action name="homePage" class="com.papercricket.controller.HomeAction" method="home">
+            <result name="SUCCESS">/home.jsp</result>
+        </action>
+    </package>
+</struts>
