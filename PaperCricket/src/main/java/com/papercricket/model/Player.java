@@ -1,30 +1,37 @@
 package com.papercricket.model;
 
 public class Player {
-	private String lastRun;
-	private String wickets;
-	private String score;
+	private int lastRun;
+	private int wickets;
+	private int score;
+	private String innings;
 	public Player() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public String getLastRun() {
+	public int getLastRun() {
 		return lastRun;
 	}
-	public void setLastRun(String lastRun) {
+	public void setLastRun(int lastRun) {
 		this.lastRun = lastRun;
 	}
-	public String getWickets() {
+	public int getWickets() {
 		return wickets;
 	}
-	public void setWickets(String wickets) {
+	public void setWickets(int wickets) {
 		this.wickets = wickets;
 	}
-	public String getScore() {
+	public int getScore() {
 		return score;
 	}
-	public void setScore(String score) {
+	public void setScore(int score) {
 		this.score = score;
+	}
+	public String getInnings() {
+		return innings;
+	}
+	public void setInnings(String innings) {
+		this.innings = innings;
 	}
 	
 	

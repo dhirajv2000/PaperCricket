@@ -98,6 +98,12 @@ h1 {
       top: 100px;
       left: 710px;
   }
+  
+  #countdown-box {
+  	position: absolute;
+  	top:120px;
+  	left: 730px;
+  }
 
   .run-btn{
     background:blueviolet;

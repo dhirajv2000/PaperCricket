@@ -28,6 +28,11 @@ public class RequestHandler {
 			}
 			return;
 		}
+		if(command.equals("Run Played")) {
+			int lastRun = Integer.parseInt(object.getString("run"));
+			String gameId = object.getString("gameId");
+			GameService.runPlayed(ctx,lastRun,gameId);
+		}
 	}
 	
 }

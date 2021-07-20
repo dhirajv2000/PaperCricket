@@ -1,16 +1,17 @@
 let templates = {
     'gamePlay': `<div id ="scoreboard" style="position: relative;">
     <h1 class="title">Paper Cricket</h1>
-    <h1 style="position: absolute; left: 400px; ">Target: n/a</h1>
-    <h1 style="position: absolute; top: 110px;left: 405px; ">Runs: 23</h1> 
-    <h1 style="position: absolute; right: 400px;">Balls Left: 18</h1>
-    <h1 style="position: absolute; top: 110px;right: 405px;">Wickets: 3</h1>
+    <h1 id = "Target" style="position: absolute; left: 400px; ">Target: n/a</h1>
+    <h1 id = "Runs" style="position: absolute; top: 110px;left: 405px; ">Runs: 0</h1> 
+    <h1 id = "Balls" style="position: absolute; right: 400px;">Balls: 0</h1>
+    <h1 id = "Wickets" style="position: absolute; top: 110px;right: 405px;">Wickets: 0</h1>
 </div>
 <div id="game-box" style="position: relative; top: 150px;">
     <div class="circle-container" id="user-playarea">
         ?
     </div>
-    <h1 id = "update-box">+5 runs</h1>
+    <h1 id = "update-box">Innings: Batting</h1>
+    <h1 id = "countdown-box"></h1>
     <div class="circle-container" id = "opponent-playarea">
         ?
     </div>
@@ -23,7 +24,7 @@ let templates = {
     <button  id="game-btn-5" type="submit" class="run-btn">5</button>
     <button  id="game-btn-6" type="submit" class="run-btn">6</button>
 </div>`,
-'joinRoom': ` <p id="error-bar">error bar</p>
+    'joinRoom': ` <p id="error-bar">error bar</p>
 <form method="post" action="index.html">
     <div class="box">
     <h1>PaperCricket</h1>

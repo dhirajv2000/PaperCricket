@@ -12,9 +12,14 @@ public class GameService {
 		Room room = new Room();
 		String gameId = GenerateId.generateGameId();
 		Player player1 = new Player();
+		player1.setInnings("Batting");
+		player1.setScore(0);
+		player1.setWickets(0);
 		room.setPlayer1(player1);
 		room.setGameId(gameId);
 		room.setGc1(ctx);
+		room.setCurrentInnings(1);
+		room.setBallsElapsed(0);
 		RoomStorage.getInstance().setGame(room);
 		GameController gc1 = room.getGc1();
 		String response = ResponseGenerator.newGameResponse(room.getGameId());
@@ -46,14 +51,40 @@ public class GameService {
 			}
 		}
 		Player player2 = new Player();
+		player2.setScore(0);
+		player2.setInnings("Bowling");
+		player2.setWickets(0);
 		room.setGc2(ctx);
 		room.setPlayer2(player2);
 		RoomStorage.getInstance().setGame(room);
 		try {
-			room.getGc2().sendMessage(ResponseGenerator.joinGameResponse());
-			room.getGc1().sendMessage(ResponseGenerator.statusUpdate("Player 2 Joined"));
+			room.getGc2().sendMessage(ResponseGenerator.joinGameResponse(gameId));
+			room.getGc1().sendMessage(ResponseGenerator.startGameResponse());
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static void runPlayed(GameController ctx, int lastRun, String gameId) {
+		Room room = RoomStorage.getInstance().getGames().get(gameId);
+		if(room.getGc1() == ctx) {
+			Player player1 = room.getPlayer1();
+			player1.setLastRun(lastRun);
+			Player player2 = room.getPlayer2();
+			if(player2.getLastRun() == 0) {
+				return;
+			} else {
+				BallResult.playBall(player1, player2, room);
+			}	
+		} else {
+			Player player1 = room.getPlayer1();
+			Player player2 = room.getPlayer2();
+			player2.setLastRun(lastRun);
+			if(player1.getLastRun() == 0) {
+				return;
+			} else {
+				BallResult.playBall(player1, player2, room);
+			}	
 		}
 	}
 }

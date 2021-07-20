@@ -11,8 +11,9 @@ public class Room {
 	private GameController gc2;
 	private Player player1;
 	private Player player2;
+	private int currentInnings;
+	private int ballsElapsed;
 	private String gameId;
-	
 	
 	public Room() {
 		super();
@@ -56,5 +57,21 @@ public class Room {
 	public void setGc2(GameController gc2) {
 		this.gc2 = gc2;
 	}
-	
+
+	public int getCurrentInnings() {
+		return currentInnings;
+	}
+
+	public void setCurrentInnings(int currentInnings) {
+		this.currentInnings = currentInnings;
+	}
+
+	public int getBallsElapsed() {
+		return ballsElapsed;
+	}
+
+	public void setBallsElapsed(int ballsElapsed) {
+		this.ballsElapsed = ballsElapsed;
+	}
+
 }
