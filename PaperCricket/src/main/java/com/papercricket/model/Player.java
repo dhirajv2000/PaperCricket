@@ -1,14 +1,30 @@
 package com.papercricket.model;
 
+import com.papercricket.controller.GameController;
+
 public class Player {
-	private int lastRun;
-	private int wickets;
-	private int score;
+	private int lastRun = 0;
+	private int wickets = 0;
+	private int score = 0;
+	private int noMoveCount = 0;
 	private String innings;
-	public Player() {
+	GameController gc;
+	
+	
+	public Player(String innings, GameController gc) {
 		super();
-		// TODO Auto-generated constructor stub
+		this.innings = innings;
+		this.gc = gc;
 	}
+
+	public GameController getGc() {
+		return gc;
+	}
+
+	public void setGc(GameController gc) {
+		this.gc = gc;
+	}
+
 	public int getLastRun() {
 		return lastRun;
 	}
@@ -32,6 +48,14 @@ public class Player {
 	}
 	public void setInnings(String innings) {
 		this.innings = innings;
+	}
+
+	public int getNoMoveCount() {
+		return noMoveCount;
+	}
+
+	public void setNoMoveCount(int noMoveCount) {
+		this.noMoveCount = noMoveCount;
 	}
 	
 	

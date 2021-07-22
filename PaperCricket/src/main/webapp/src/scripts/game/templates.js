@@ -3,7 +3,7 @@ let templates = {
     <h1 class="title">Paper Cricket</h1>
     <h1 id = "Target" style="position: absolute; left: 400px; ">Target: n/a</h1>
     <h1 id = "Runs" style="position: absolute; top: 110px;left: 405px; ">Runs: 0</h1> 
-    <h1 id = "Balls" style="position: absolute; right: 400px;">Balls: 0</h1>
+    <h1 id = "Balls" style="position: absolute; right: 400px;">Overs: 0.0</h1>
     <h1 id = "Wickets" style="position: absolute; top: 110px;right: 405px;">Wickets: 0</h1>
 </div>
 <div id="game-box" style="position: relative; top: 150px;">
@@ -24,7 +24,7 @@ let templates = {
     <button  id="game-btn-5" type="submit" class="run-btn">5</button>
     <button  id="game-btn-6" type="submit" class="run-btn">6</button>
 </div>`,
-    'joinRoom': ` <p id="error-bar">error bar</p>
+    'joinRoom': ` <p id="error-bar"></p>
 <form method="post" action="index.html">
     <div class="box">
     <h1>PaperCricket</h1>

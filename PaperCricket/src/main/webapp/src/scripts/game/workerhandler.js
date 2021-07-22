@@ -22,6 +22,20 @@ myWorker.onmessage = function (e) {
         },
         "Start Game": function () {
             gameView.startGame();
+        },
+        "Innings Change": function () {
+            gameView.inningsChange(workerResponse['Target'], workerResponse['Innings'], workerResponse['score'],
+                workerResponse['balls'], workerResponse['wickets'], workerResponse['battingMove'], workerResponse['bowlingMove']);
+        },
+        "Declare Result": function () {
+            gameView.declareResult(workerResponse['message'], workerResponse['score'],
+                workerResponse['balls'], workerResponse['wickets'], workerResponse['battingMove'], workerResponse['bowlingMove']);
+        },
+        "Dead Ball": function () {
+            gameView.deadBall();
+        },
+        "Terminate Match": function () {
+            gameView.declareResult(workerResponse['result']);
         }
     }
     let workerResponse = JSON.parse(e.data);
