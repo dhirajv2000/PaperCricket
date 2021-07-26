@@ -5,11 +5,11 @@ myWorker.onmessage = function (e) {
     let responseFunctions = {
         "New Game Created": function () {
             gameView.loadNewGame(workerResponse['gameId'], workerResponse['Innings']);
-            gameView.initialize();
+            gameView.initializeEventListeners();
         },
         "Game Joined": function () {
             gameView.joinNewGame(workerResponse['gameId'], workerResponse['Innings']);
-            gameView.initialize();
+            gameView.initializeEventListeners();
         },
         "Status Update": function () {
             gameView.statusUpdate(workerResponse['message']);

@@ -4,11 +4,13 @@ function GameView() {
     
     //Sets up a new game
     this.loadNewGame = function (newGameId, firstInnings) {
+    	console.log(templates['target'])
         gameId = newGameId;
         innings = firstInnings;
         document.querySelector('body').innerHTML = "";
         document.querySelector('body').innerHTML = templates['gamePlay'];
         document.getElementById('update-box').innerHTML = "Game Id is:" + gameId;
+        self.initaliseScoreBoard(innings);
     }
 
     //To join a pre-existing game
@@ -18,13 +20,14 @@ function GameView() {
         document.querySelector('body').innerHTML = "";
         document.querySelector('body').innerHTML = templates['gamePlay'];
         self.startGame("Player 1 is ready")
+        self.initaliseScoreBoard(innings);
     }
     
     //Begins the game, after players have joined
     this.startGame = function (message = "Player 2 is ready") {
         document.getElementById('update-box').innerHTML = message;
         setTimeout(function () {
-            document.getElementById('update-box').innerHTML = "Innings1: " + innings;
+            document.getElementById('update-box').innerHTML = "Innings 1: " + innings;
             self.startCountdown();
         }, 3000);
     }
@@ -52,6 +55,21 @@ function GameView() {
         }, 1000);
     }
     
+    this.initaliseScoreBoard = function(innings, target = null) {
+    	 if(innings == "Batting"){
+         	  document.getElementById('user-scoreboard').innerHTML =  templates['battingScoreBoard']; 
+         	  document.getElementById('opponent-scoreboard').innerHTML = templates['bowlingScoreBoard'];
+         	  if(target){
+         		 document.getElementById('user-scoreboard').innerHTML +=  templates['target'];
+         	  }
+         } else {
+        	 document.getElementById('user-scoreboard').innerHTML =  templates['bowlingScoreBoard'];
+        	 document.getElementById('opponent-scoreboard').innerHTML =  templates['battingScoreBoard'];
+        	  if(target){
+          		 document.getElementById('opponent-scoreboard').innerHTML +=  templates['target'];
+          	  }
+         }
+    }
     //Updates the status bar
     this.statusUpdate = function (message) {
         document.getElementById('update-box').innerHTML = message;
@@ -59,16 +77,16 @@ function GameView() {
     
     //Updates the score Board
     this.setScoreBoard = function (score, balls, wickets, target = null) {
-        console.log(target)
-        document.querySelector('#Runs').innerHTML = "Runs: " + score;
-        document.querySelector('#Wickets').innerHTML = "Wickets: " + wickets;
-        document.querySelector('#Balls').innerHTML = "Overs: " + Math.trunc(balls / 6) + "." + (balls % 6);
-        if (target) document.querySelector('#Target').innerHTML = "Target: " + target;
+        document.querySelector('#Runs').innerHTML = " " + score + "/" + wickets;
+        document.querySelector('#Balls').innerHTML = Math.trunc(balls / 6) + "." + (balls % 6);
+//        document.querySelector('#Strike-rate').innerHTML = ((score/balls)*100).toFixed(2);
+        if (target) document.querySelector('#Target').innerHTML = target;
 
     }
     
     //Shows opponents move
     this.setOpponentsMove = function (battingMove, bowlingMove) {
+    	if(battingMove == 7 || bowlingMove == 7) return;
         if (innings == "Batting") {
             document.querySelector('#opponent-playarea').innerHTML = bowlingMove;
         } else {
@@ -98,9 +116,11 @@ function GameView() {
         self.setOpponentsMove(battingMove, bowlingMove);
         innings = secondInnings;
         setTimeout(function () {
-            self.setScoreBoard(0, 0, 0, target);
             self.clearOpponentsMove();
-            self.statusUpdate("Innings2: " + innings)
+            self.initaliseScoreBoard(innings, target);
+            self.setScoreBoard(0, 0, 0, target);
+            alert("Innings Change!")
+            self.statusUpdate("Innings 2: " + innings)
             self.startCountdown();
         }, 4000);
     }
@@ -144,7 +164,7 @@ function GameView() {
     }
     
     //Initializes Event listeners
-    this.initialize = function () {
+    this.initializeEventListeners = function () {
         for (let index = 1; index < 7; index++) {
             document.querySelector('#' + "game-btn-" + index).addEventListener('click', self.callBack);
         }

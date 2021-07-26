@@ -1,36 +1,3 @@
-body {
-    background-color: ghostwhite;
-    margin: 0 auto 0 auto;
-    width: 100%;
-    text-align: center;
-    margin: 20px 0px 20px 0px;
-}
-
-.title{
-	font-family: 'Lobster', cursive;
-	font-size: 1.5rem;
-	color: black;
-}
-
-h6{
-    padding: 0px;
-    margin-top: 2px;
-    margin-bottom: 0px;
-    color: gainsboro;
-
-}
-
-p {
-    font-size: 12px;
-    text-decoration: none;
-    color: grey;
-}
-
-h1 {
-    font-size: 1.5rem;
-    color: dimgrey;
-}
-
 .box{
     background:white;
     width:300px;
@@ -71,55 +38,88 @@ h1 {
   form {
       text-align: center;
   }
+  
+  .container {
+  display: flex;
+}
 
-  .circle-container {
-    width: 200px;
-    line-height: 200px;
+.section {
+  flex: 1; 
+  width: 33.33%;
+}
+
+#title{
+  text-align: center;
+  font-family: 'Lobster', cursive;
+  font-size: 40px;
+  color: #FF6F3C;
+}
+
+
+
+.circle {
+  margin-top: 5%;
+  margin-bottom: 7.5%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  /* height: width; */
+  border-radius: 50%;
+  background: #FF6F3C;
+  text-align: center;
+  font-size: 80px;
+  line-height: 250px;
+}
+
+.buttons-container {
+  margin-top: 7.5%;
+  margin-bottom: 8.5%;
+  min-width : 170px;
+}
+
+/* Run buttons */
+.buttons-container button {
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid blanchedalmond;
+  color: white; 
+  padding: 10px 24px;
+  cursor: pointer; 
+  width: 70%; 
+  display: block; 
+}
+
+.buttons-container button:not(:last-child) {
+  border-bottom: none; 
+}
+
+.buttons-container button:hover {
+  background-color: #3d443d;
+}
+
+body{
+  background-color: #155263;
+  margin: 0p;
+  min-width:500px; 
+  width: 100%; height: 97vh; overflow: auto;
+}
+
+
+
+
+@media (max-width: 758px) { /*breakpoint*/
+  .circle {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 230px;
+    height: 230px;
     border-radius: 50%;
+    background:#FF6F3C;
     text-align: center;
     font-size: 80px;
-    border: 2px solid #666;
+    line-height: 230px;
   }
-
-  #user-playarea {
-    position: absolute;
-    top: 70px;;
-    left: 400px;
-  }
-
-  #opponent-playarea {
-    position: absolute;
-    top: 70px;;
-    right: 400px;
-  }
-
-  #score-update {
-      position: absolute;
-      top: 100px;
-      left: 710px;
-  }
+}
   
-  #countdown-box {
-  	position: absolute;
-  	top:120px;
-  	left: 730px;
-  }
-
-  .run-btn{
-    background:blueviolet;
-    width:125px;
-    padding-top:5px;
-    padding-bottom:5px;
-    color:white;
-    border-radius:4px;
-    margin-top:20px;
-    margin-bottom:20px;
-    float:left;
-    margin-left:5px;
-    font-weight:800;
-    font-size:0.8em;
-  }
-
-  #error-bar{
-    columns: grey
-  }

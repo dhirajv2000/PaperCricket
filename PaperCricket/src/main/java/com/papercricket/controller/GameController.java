@@ -1,17 +1,14 @@
 package com.papercricket.controller;
 
+import javax.websocket.OnClose;
+import javax.websocket.OnError;
+import javax.websocket.OnMessage;
+import javax.websocket.OnOpen;
+import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
-import com.papercricket.service.GameService;
 import java.io.IOException;
-import java.io.StringReader;
-import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.atomic.AtomicInteger;
-import javax.websocket.*;
-import javax.websocket.server.ServerEndpoint;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import java.util.ArrayList;
-import java.util.List;
+
 @ServerEndpoint("/websocket")
 public class GameController {
 	private Session session;
@@ -35,7 +32,7 @@ public class GameController {
 	}
 	
 	 @OnError
-	    public void onError(Session session, Throwable t){
+	 public void onError(Session session, Throwable t){
 	        System.out.println(t.getMessage());
 	        System.out.println(t.getCause());
 	        t.printStackTrace();
