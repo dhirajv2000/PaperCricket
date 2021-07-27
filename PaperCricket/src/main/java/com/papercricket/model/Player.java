@@ -11,9 +11,8 @@ public class Player {
 	GameController gc;
 	
 	
-	public Player(String innings, GameController gc) {
+	public Player(GameController gc) {
 		super();
-		this.innings = innings;
 		this.gc = gc;
 	}
 

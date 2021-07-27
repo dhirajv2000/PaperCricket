@@ -72,6 +72,7 @@
 }
 
 .buttons-container {
+  text-align: center;
   margin-top: 7.5%;
   margin-bottom: 8.5%;
   min-width : 170px;
@@ -79,19 +80,17 @@
 
 /* Run buttons */
 .buttons-container button {
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 20px;
   border: 1px solid blanchedalmond;
   color: white; 
-  padding: 10px 24px;
+  font-size: 15px;
+  padding: 5% 5%;
+  text-align: center;
   cursor: pointer; 
-  width: 70%; 
-  display: block; 
+  width: 15%; 
+  display: inline-block; 
 }
 
-.buttons-container button:not(:last-child) {
-  border-bottom: none; 
-}
 
 .buttons-container button:hover {
   background-color: #3d443d;

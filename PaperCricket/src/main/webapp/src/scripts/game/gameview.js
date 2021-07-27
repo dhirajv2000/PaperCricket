@@ -2,35 +2,40 @@ function GameView() {
     const self = this;
     let gameId, innings, hasValidMove = false;
     
+      
+    
     //Sets up a new game
-    this.loadNewGame = function (newGameId, firstInnings) {
-    	console.log(templates['target'])
-        gameId = newGameId;
-        innings = firstInnings;
-        document.querySelector('body').innerHTML = "";
-        document.querySelector('body').innerHTML = templates['gamePlay'];
-        document.getElementById('update-box').innerHTML = "Game Id is:" + gameId;
-        self.initaliseScoreBoard(innings);
-    }
+//    this.loadNewGame = function (newGameId, firstInnings) {
+//    	console.log(templates['target'])
+//        gameId = newGameId;
+//        innings = firstInnings;
+//        document.querySelector('body').innerHTML = "";
+//        document.querySelector('body').innerHTML = templates['gamePlay'];
+//        document.getElementById('update-box').innerHTML = "Game Id is:" + gameId;
+//        self.initaliseScoreBoard(innings);
+//    }
 
     //To join a pre-existing game
-    this.joinNewGame = function (newGameId, firstInnings) {
-        gameId = newGameId;
-        innings = firstInnings;
-        document.querySelector('body').innerHTML = "";
-        document.querySelector('body').innerHTML = templates['gamePlay'];
-        self.startGame("Player 1 is ready")
+//    this.joinNewGame = function (newGameId, firstInnings) {
+//        gameId = newGameId;
+//        innings = firstInnings;
+//        document.querySelector('body').innerHTML = "";
+//        document.querySelector('body').innerHTML = templates['gamePlay'];
+//        self.startGame("Player 1 is ready")
+//        self.initaliseScoreBoard(innings);
+//    }
+    
+    this.startGame = function(GameId, firstInnings) {
+    	gameId = GameId;
+    	innings = firstInnings;
+    	document.querySelector('body').innerHTML = "";
+        document.querySelector('body').innerHTML = templates['gamePlay']
+        self.initializeEventListeners();
+        document.getElementById('update-box').innerHTML = "Innings 1: " + innings;
         self.initaliseScoreBoard(innings);
+        self.startCountdown();
     }
     
-    //Begins the game, after players have joined
-    this.startGame = function (message = "Player 2 is ready") {
-        document.getElementById('update-box').innerHTML = message;
-        setTimeout(function () {
-            document.getElementById('update-box').innerHTML = "Innings 1: " + innings;
-            self.startCountdown();
-        }, 3000);
-    }
     
     //Countdown for each move
     this.startCountdown = function () {

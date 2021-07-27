@@ -1,9 +1,15 @@
 let gameView = new GameView();
+let tossView = new TossView();
+
 window.addEventListener('resize', function() {
 	let buttonSection = document.getElementById('button-section');
     let referenceNode = document.getElementById('main-container');
-	buttonSection.parentNode.removeChild(buttonSection);
-	if(window.innerWidth < 758){
+    try{
+    	buttonSection.parentNode.removeChild(buttonSection);
+    } catch(err){
+    	return;
+    }
+	if(window.innerWidth/window.screen.availWidth < 0.5){
 		buttonSection.style.margin = "auto"; 
 		document.body.appendChild(buttonSection);
 	} else {

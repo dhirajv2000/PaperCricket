@@ -26,6 +26,7 @@
 </body>
 <script src="src/scripts/game/workerhandler.js"></script>
 <script src="src/scripts/game/templates.js"></script>
+<script src="src/scripts/game/tossview.js"></script>
 <script src="src/scripts/game/roomjoinview.js"></script>
 <script src="src/scripts/game/gameview.js"></script>
 <script src="src/scripts/game/main.js"></script>

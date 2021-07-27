@@ -8,9 +8,81 @@ import com.papercricket.storage.RoomStorage;
 import java.io.IOException;
 
 public class GameService {
+	
+	public static void runPlayed(GameController ctx, int lastRun, String gameId) {
+		Room room = RoomStorage.getInstance().getGames().get(gameId);
+		if(room.getPlayer1().getGc() == ctx) {
+			Player player1 = room.getPlayer1();
+			player1.setLastRun(lastRun);
+			Player player2 = room.getPlayer2();
+			if(player2.getLastRun() == 0) {
+				return;
+			} else {
+				BallOutcome.playBall(player1, player2, room);
+			}	
+		} else {
+			Player player1 = room.getPlayer1();
+			Player player2 = room.getPlayer2();
+			player2.setLastRun(lastRun);
+			if(player1.getLastRun() == 0) {
+				return;
+			} else {
+				BallOutcome.playBall(player1, player2, room);
+			}	
+		}
+	}
+	
+	public static void startGame(GameController ctx, String chosenInnings, String gameId) {
+		Room room = RoomStorage.getInstance().getGames().get(gameId);
+		Player player1 = room.getPlayer1();
+		Player player2 = room.getPlayer2();
+		if(room.getPlayer1().getGc() == ctx) {
+			if(chosenInnings.equals("Batting")) {
+				player1.setInnings("Batting");
+				player2.setInnings("Bowling");
+			} else {
+				player1.setInnings("Bowling");
+				player2.setInnings("Batting");
+			}
+		} else {
+			if(chosenInnings.equals("Batting")) {
+				player2.setInnings("Batting");
+				player1.setInnings("Bowling");
+			} else {
+				player2.setInnings("Bowling");
+				player1.setInnings("Batting");
+			}
+		}
+		try {
+			player1.getGc().sendMessage(ResponseGenerator.startGameResponse(player1.getInnings(), gameId));
+			player2.getGc().sendMessage(ResponseGenerator.startGameResponse(player2.getInnings(), gameId));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}	
+	}
+	
+	public static void handleToss(GameController ctx, String ChosenSide, String gameId) {
+		 Room room = RoomStorage.getInstance().getGames().get(gameId);
+		 int randomNumber = (int) (Math.random() * (3 - 1)) + 1;
+		 if(randomNumber == 1) {
+			 try {
+				room.getPlayer1().getGc().sendMessage(ResponseGenerator.tossResult("Won"));
+				room.getPlayer2().getGc().sendMessage(ResponseGenerator.tossResult("Lost"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				room.getPlayer2().getGc().sendMessage(ResponseGenerator.tossResult("Won"));
+				room.getPlayer1().getGc().sendMessage(ResponseGenerator.tossResult("Lost"));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	public static void createGame(GameController ctx) {
 		String gameId = GenerateId.generateGameId();
-		Player player1 = new Player( "Batting", ctx);
+		Player player1 = new Player(ctx);
 		Room room = new Room(gameId);
 		room.setPlayer1(player1);
 		RoomStorage.getInstance().setGame(room);
@@ -42,37 +114,22 @@ public class GameService {
 				e.printStackTrace();
 			}
 		}
-		Player player2 = new Player("Bowling", ctx);
+		Player player2 = new Player(ctx);
 		room.setPlayer2(player2);
 		RoomStorage.getInstance().setGame(room);
 		try {
 			room.getPlayer2().getGc().sendMessage(ResponseGenerator.joinGameResponse(gameId));
-			room.getPlayer1().getGc().sendMessage(ResponseGenerator.startGameResponse());
+			room.getPlayer1().getGc().sendMessage(ResponseGenerator.startTossResponse());
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		try {
+//			room.getPlayer2().getGc().sendMessage(ResponseGenerator.joinGameResponse(gameId));
+//			room.getPlayer1().getGc().sendMessage(ResponseGenerator.startGameResponse());
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 	
-	public static void runPlayed(GameController ctx, int lastRun, String gameId) {
-		Room room = RoomStorage.getInstance().getGames().get(gameId);
-		if(room.getPlayer1().getGc() == ctx) {
-			Player player1 = room.getPlayer1();
-			player1.setLastRun(lastRun);
-			Player player2 = room.getPlayer2();
-			if(player2.getLastRun() == 0) {
-				return;
-			} else {
-				BallOutcome.playBall(player1, player2, room);
-			}	
-		} else {
-			Player player1 = room.getPlayer1();
-			Player player2 = room.getPlayer2();
-			player2.setLastRun(lastRun);
-			if(player1.getLastRun() == 0) {
-				return;
-			} else {
-				BallOutcome.playBall(player1, player2, room);
-			}	
-		}
-	}
 }

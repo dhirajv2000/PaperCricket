@@ -4,12 +4,16 @@ let myWorker = new Worker("src/scripts/workers/WebSocketWorker.js");
 myWorker.onmessage = function (e) {
     let responseFunctions = {
         "New Game Created": function () {
-            gameView.loadNewGame(workerResponse['gameId'], workerResponse['Innings']);
-            gameView.initializeEventListeners();
+        	tossView.showTossScreen("Game Id is : " + workerResponse['gameId'], workerResponse['gameId']);
         },
         "Game Joined": function () {
-            gameView.joinNewGame(workerResponse['gameId'], workerResponse['Innings']);
-            gameView.initializeEventListeners();
+        	tossView.showTossScreen("Player 1 is tossing the coin ", workerResponse['gameId']);
+        },
+        "Start Toss": function (){
+        	tossView.startToss();
+        },
+        "Toss Result": function () {
+        	tossView.handleTossResult(workerResponse['result']);
         },
         "Status Update": function () {
             gameView.statusUpdate(workerResponse['message']);
@@ -21,7 +25,7 @@ myWorker.onmessage = function (e) {
             gameView.scoreUpdate(workerResponse['score'], workerResponse['balls'], workerResponse['wickets'], workerResponse['battingMove'], workerResponse['bowlingMove']);
         },
         "Start Game": function () {
-            gameView.startGame();
+            gameView.startGame(workerResponse['gameId'], workerResponse['innings']);
         },
         "Innings Change": function () {
             gameView.inningsChange(workerResponse['Target'], workerResponse['Innings'], workerResponse['score'],

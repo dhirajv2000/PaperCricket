@@ -3,24 +3,37 @@ package com.papercricket.model;
 import org.json.JSONObject;
 
 public class ResponseGenerator {
+	
+	public static String startTossResponse() {
+		JSONObject response = new JSONObject();
+		response.put("command", "Start Toss");
+		return response.toString();
+	}
+	
+	public static String tossResult(String result) {
+		JSONObject response = new JSONObject();
+		response.put("command", "Toss Result");
+		response.put("result", result);
+		return response.toString();
+	}
 	public static String newGameResponse(String gameId) {
 		JSONObject response = new JSONObject();
 		response.put("command", "New Game Created");
 		response.put("gameId", gameId);
-		response.put("Innings", "Batting");
 		return response.toString();
 	}
 	
-	public static String startGameResponse() {
+	public static String startGameResponse(String innings, String gameId) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Start Game");
+		response.put("innings", innings);
+		response.put("gameId", gameId);
 		return response.toString();
 	}
 	
 	public static String joinGameResponse(String gameId) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Game Joined");
-		response.put("Innings", "Bowling");
 		response.put("gameId", gameId);
 		return response.toString();
 	}

@@ -14,6 +14,12 @@ public class RequestHandler {
 		JSONArray array = new JSONArray(message);
 		JSONObject object = array.getJSONObject(0);
 		String command = object.getString("command");
+		if(command.equals("Run Played")) {
+			int lastRun = Integer.parseInt(object.getString("run"));
+			String gameId = object.getString("gameId");
+			GameService.runPlayed(ctx,lastRun,gameId);
+			return;
+		}
 		if(command.equals("New Game")) {
 			GameService.createGame(ctx);
 			return;
@@ -28,10 +34,14 @@ public class RequestHandler {
 			}
 			return;
 		}
-		if(command.equals("Run Played")) {
-			int lastRun = Integer.parseInt(object.getString("run"));
-			String gameId = object.getString("gameId");
-			GameService.runPlayed(ctx,lastRun,gameId);
+		if(command.equals("Coin Tossed")) {
+			GameService.handleToss(ctx, object.getString("chosenSide"), object.getString("gameId"));
+			return;
+		}
+		
+		if(command.equals("Innings Chosen")) {
+			GameService.startGame(ctx, object.getString("chosenInnings"), object.getString("gameId"));
+			return;
 		}
 	}
 	
