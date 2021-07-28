@@ -4,7 +4,7 @@ let myWorker = new Worker("src/scripts/workers/WebSocketWorker.js");
 myWorker.onmessage = function (e) {
     let responseFunctions = {
         "New Game Created": function () {
-        	tossView.showTossScreen("Game Id is : " + workerResponse['gameId'], workerResponse['gameId']);
+        	tossView.showTossScreen("Waiting for player 2 to join" , workerResponse['gameId'], "Game ID is : " + workerResponse['gameId']);
         },
         "Game Joined": function () {
         	tossView.showTossScreen("Player 1 is tossing the coin ", workerResponse['gameId']);
@@ -13,7 +13,7 @@ myWorker.onmessage = function (e) {
         	tossView.startToss();
         },
         "Toss Result": function () {
-        	tossView.handleTossResult(workerResponse['result']);
+        	tossView.handleTossResult(workerResponse['result'], workerResponse['coinSide']);
         },
         "Status Update": function () {
             gameView.statusUpdate(workerResponse['message']);

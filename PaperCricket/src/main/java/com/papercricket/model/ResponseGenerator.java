@@ -10,9 +10,10 @@ public class ResponseGenerator {
 		return response.toString();
 	}
 	
-	public static String tossResult(String result) {
+	public static String tossResult(String result, String coinSide) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Toss Result");
+		response.put("coinSide", coinSide);
 		response.put("result", result);
 		return response.toString();
 	}

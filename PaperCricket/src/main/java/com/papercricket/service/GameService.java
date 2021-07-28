@@ -63,18 +63,19 @@ public class GameService {
 	
 	public static void handleToss(GameController ctx, String ChosenSide, String gameId) {
 		 Room room = RoomStorage.getInstance().getGames().get(gameId);
-		 int randomNumber = (int) (Math.random() * (3 - 1)) + 1;
-		 if(randomNumber == 1) {
+		 String coinArray[] = {"Head", "Tail" };
+		 int randomNumber = (int) (Math.random() * (2 - 0)) + 0;
+		 if(coinArray[randomNumber].equals(ChosenSide)) {
 			 try {
-				room.getPlayer1().getGc().sendMessage(ResponseGenerator.tossResult("Won"));
-				room.getPlayer2().getGc().sendMessage(ResponseGenerator.tossResult("Lost"));
+				room.getPlayer1().getGc().sendMessage(ResponseGenerator.tossResult("Won", coinArray[randomNumber]));
+				room.getPlayer2().getGc().sendMessage(ResponseGenerator.tossResult("Lost", coinArray[randomNumber]));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} else {
 			try {
-				room.getPlayer2().getGc().sendMessage(ResponseGenerator.tossResult("Won"));
-				room.getPlayer1().getGc().sendMessage(ResponseGenerator.tossResult("Lost"));
+				room.getPlayer2().getGc().sendMessage(ResponseGenerator.tossResult("Won", coinArray[randomNumber]));
+				room.getPlayer1().getGc().sendMessage(ResponseGenerator.tossResult("Lost", coinArray[randomNumber]));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}

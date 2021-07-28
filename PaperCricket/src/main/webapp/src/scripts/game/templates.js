@@ -2,7 +2,7 @@ let templates = {
     'gamePlay': `<h1 id="title">PaperCricket</h1>
     <div class="container" id = "main-container">
         <div class="section" id="user-section">
-            <div id="user-playarea" class="circle">
+            <div id="user-playarea" class="circle" style= "background: #C400FF;">
                 ?
             </div>
     	<div id = "user-scoreboard"></div>
@@ -27,7 +27,7 @@ let templates = {
             
         </div>
         <div class="section" id = "opponent-section">
-            <div id="opponent-playarea" class="circle">
+            <div id="opponent-playarea" class="circle" style="background: #00C1D4;">
                 ?
             </div>  
            <div id = "opponent-scoreboard"></div>
@@ -56,21 +56,22 @@ let templates = {
                 <button id="game-btn-6" style="background-color: #FF0D0D;">6</button>
             </div>
             <div>
-                <h1 id="update-box" style="line-height: 0px; font-size:x-large; font-family:'Oswald'; text-align:center; color: #FF6F3C; margin-top: 35px;"></h1>
-            <h1 style=" line-height: 0px;font-size:x-large; text-align:center; font-family: 'Oswald'; color: #FF6F3C; margin-top: 35px;"> <span id="countdown-box" style="color: #FAB733;"></span></h1>
+                <h1 id="update-box" style=" font-size:x-large; font-family:'Oswald'; text-align:center; color: #FAB733; margin-top: 35px;"></h1>
+            <h1 style=" font-size:x-large; text-align:center; font-family: 'Oswald'; color: #FF6F3C; margin-top: 35px;"> <span id="countdown-box" style="color: #FAB733;"></span></h1>
             </div>
             
         </div>`,
       'tossSection': `<h1 id="title">PaperCricket</h1>
-    <div class="section" style="margin: auto; text-align: center; margin-top: 100px;">
-        <h1 id="update-box" style="line-height: 0px; font-size:x-large; font-family: 'Oswald'; text-align:center; color: #FAB733; margin-top: 35px; white-space: nowrap;">Toss: Chose Head or Tail</h1>
+    <div class="section" style="margin: auto; text-align: center; margin-top: 100px; width: 100%;  ">
+        <h1 id="update-box" style=" font-size:x-large; font-family: 'Oswald'; text-align:center; color: #FAB733; margin-top: 35px; white-space: nowrap; width:100% display:inline-block  "><span id = "loading-dots" style="width: 0px; display: inline-block; text-align:center padding:0; margin: 0;"></span></h1> 
+        <h1 id="countdown-box" style=" font-size:x-large; font-family: 'Oswald'; text-align:center; color: #FAB733; margin-top: 5px; white-space: nowrap; width:100% display: inline-block"><span id="countdown-box" style="color: #FAB733;"></span></h1>
     </div>`,
-    'coinButtons': `     <div class="buttons-container">
-            <button id="head-btn" style="background-color: #FF4E11;">Head</button>
-            <button id="tail-btn" style="background-color: #FF0D0D;">Tail</button>
+    'coinButtons': `     <div   style = "margin-top: 5px; text-align:center;">
+            <button id="head-btn" class = "coin-btn" >Head</button>
+            <button id="tail-btn" class = "coin-btn" >Tail</button>
         </div>`,
-    'inningsButtons': `     <div class="buttons-container">
-        <button id="bat-btn" style="background-color: #FF4E11;">Batting</button>
-        <button id="bowl-btn" style="background-color: #FF0D0D;">Bowling</button>
+    'inningsButtons': `     <div c style = "margin-top: 5px; text-align: center;">
+        <button id="bat-btn" class = "coin-btn">Batting</button>
+        <button id="bowl-btn" class = "coin-btn">Bowling</button>
     </div>`
 }

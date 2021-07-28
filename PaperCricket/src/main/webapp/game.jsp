@@ -12,7 +12,7 @@
 </head>
 <body>
 	<p id="error-bar"></p>
-	<form method="post">
+	<form>
 		<div class="box">
 			<h1>PaperCricket</h1>
 			<button name="joinGameBtn" id="new-game-btn" type="submit"

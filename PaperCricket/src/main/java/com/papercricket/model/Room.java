@@ -1,6 +1,5 @@
 package com.papercricket.model;
 
-import com.papercricket.controller.GameController;
 
 import lombok.Data;
 
