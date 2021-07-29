@@ -73,5 +73,11 @@ let templates = {
     'inningsButtons': `     <div c style = "margin-top: 5px; text-align: center;">
         <button id="bat-btn" class = "coin-btn">Batting</button>
         <button id="bowl-btn" class = "coin-btn">Bowling</button>
-    </div>`
+    </div>`,
+    'roomTable' : `<table>
+			<thead>
+			</thead>
+			<tbody>
+			</tbody>
+		</table>`
 }

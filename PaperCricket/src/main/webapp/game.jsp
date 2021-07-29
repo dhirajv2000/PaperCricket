@@ -7,11 +7,13 @@
 <link rel="stylesheet" href="src/styles/style.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@500&display=swap" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@500&display=swap"
+	rel="stylesheet">
 <title>PaperCricket</title>
 </head>
 <body>
-	<p id="error-bar"></p>
+	<h4 id="error-bar" style ="text-align:center"></h4>
 	<form>
 		<div class="box">
 			<h1>PaperCricket</h1>
@@ -23,10 +25,14 @@
 				class="btn">Join Game</button>
 		</div>
 	</form>
+	
+	<button class = "toggle-btn">HIDE/SHOW ROOMS</button>
+
 </body>
 <script src="src/scripts/game/workerhandler.js"></script>
 <script src="src/scripts/game/templates.js"></script>
 <script src="src/scripts/game/tossview.js"></script>
+<script src="src/scripts/game/roomdisplay.js"></script>
 <script src="src/scripts/game/roomjoinview.js"></script>
 <script src="src/scripts/game/gameview.js"></script>
 <script src="src/scripts/game/main.js"></script>

@@ -94,7 +94,9 @@ function TossView() {
             "gameId": gameId
         }])
     }
-
+    
+    this.getGameId = () => gameId;
+    
     //Event handler for coin buttons
     this.coinEventHandler = function () {
         if (!hasValidClick) return;

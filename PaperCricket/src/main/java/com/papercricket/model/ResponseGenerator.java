@@ -3,13 +3,13 @@ package com.papercricket.model;
 import org.json.JSONObject;
 
 public class ResponseGenerator {
-	
+
 	public static String startTossResponse() {
 		JSONObject response = new JSONObject();
 		response.put("command", "Start Toss");
 		return response.toString();
 	}
-	
+
 	public static String tossResult(String result, String coinSide) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Toss Result");
@@ -17,13 +17,14 @@ public class ResponseGenerator {
 		response.put("result", result);
 		return response.toString();
 	}
+
 	public static String newGameResponse(String gameId) {
 		JSONObject response = new JSONObject();
 		response.put("command", "New Game Created");
 		response.put("gameId", gameId);
 		return response.toString();
 	}
-	
+
 	public static String startGameResponse(String innings, String gameId) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Start Game");
@@ -31,28 +32,28 @@ public class ResponseGenerator {
 		response.put("gameId", gameId);
 		return response.toString();
 	}
-	
+
 	public static String joinGameResponse(String gameId) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Game Joined");
 		response.put("gameId", gameId);
 		return response.toString();
 	}
-	
+
 	public static String statusUpdate(String message) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Status Update");
 		response.put("message", message);
 		return response.toString();
 	}
-	
+
 	public static String errorUpdate(String message) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Error Update");
 		response.put("message", message);
 		return response.toString();
 	}
-	
+
 	public static String scoreUpdate(int score, int ballsElapsed, int wickets, int battingMove, int bowlingMove) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Score Update");
@@ -63,8 +64,9 @@ public class ResponseGenerator {
 		response.put("bowlingMove", bowlingMove);
 		return response.toString();
 	}
-	
-	public static String inningsChange(int target, String innings, int score, int ballsElapsed, int wickets, int battingMove, int bowlingMove) {
+
+	public static String inningsChange(int target, String innings, int score, int ballsElapsed, int wickets,
+			int battingMove, int bowlingMove) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Innings Change");
 		response.put("Target", target);
@@ -76,8 +78,9 @@ public class ResponseGenerator {
 		response.put("bowlingMove", bowlingMove);
 		return response.toString();
 	}
-	
-	public static String declareResults(String message, int score, int ballsElapsed, int wickets, int battingMove, int bowlingMove) {
+
+	public static String declareResults(String message, int score, int ballsElapsed, int wickets, int battingMove,
+			int bowlingMove) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Declare Result");
 		response.put("message", message);
@@ -88,13 +91,13 @@ public class ResponseGenerator {
 		response.put("bowlingMove", bowlingMove);
 		return response.toString();
 	}
-	
-	public static String deadBall(){
+
+	public static String deadBall() {
 		JSONObject response = new JSONObject();
 		response.put("command", "Dead Ball");
 		return response.toString();
 	}
-	
+
 	public static String terminateMatch(String message) {
 		JSONObject response = new JSONObject();
 		response.put("command", "Terminate Match");

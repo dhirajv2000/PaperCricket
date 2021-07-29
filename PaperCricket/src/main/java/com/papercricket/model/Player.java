@@ -9,8 +9,7 @@ public class Player {
 	private int noMoveCount = 0;
 	private String innings;
 	GameController gc;
-	
-	
+
 	public Player(GameController gc) {
 		super();
 		this.gc = gc;
@@ -27,24 +26,31 @@ public class Player {
 	public int getLastRun() {
 		return lastRun;
 	}
+
 	public void setLastRun(int lastRun) {
 		this.lastRun = lastRun;
 	}
+
 	public int getWickets() {
 		return wickets;
 	}
+
 	public void setWickets(int wickets) {
 		this.wickets = wickets;
 	}
+
 	public int getScore() {
 		return score;
 	}
+
 	public void setScore(int score) {
 		this.score = score;
 	}
+
 	public String getInnings() {
 		return innings;
 	}
+
 	public void setInnings(String innings) {
 		this.innings = innings;
 	}
@@ -56,6 +62,5 @@ public class Player {
 	public void setNoMoveCount(int noMoveCount) {
 		this.noMoveCount = noMoveCount;
 	}
-	
-	
+
 }

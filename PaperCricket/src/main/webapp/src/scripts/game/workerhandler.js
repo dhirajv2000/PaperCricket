@@ -40,6 +40,9 @@ myWorker.onmessage = function (e) {
         },
         "Terminate Match": function () {
             gameView.declareResult(workerResponse['result']);
+        },
+        "Display Rooms": function (){
+        	roomDisplay.displayAll(workerResponse['roomList']);
         }
     }
     let workerResponse = JSON.parse(e.data);

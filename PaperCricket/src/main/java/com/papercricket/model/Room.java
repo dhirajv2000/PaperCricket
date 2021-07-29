@@ -1,22 +1,19 @@
 package com.papercricket.model;
 
-
-import lombok.Data;
-
-
-@Data
 public class Room {
 	private Player player1;
 	private Player player2;
+	private boolean isOpen;
 	private int currentInnings = 1;
 	private int ballsElapsed = 0;
 	private int target;
 	private int combinedNoMoveCount = 0;
 	private String gameId;
-	
+
 	public Room(String gameId) {
 		super();
 		this.gameId = gameId;
+		this.isOpen = true;
 	}
 
 	public String getGameId() {
@@ -27,7 +24,6 @@ public class Room {
 		this.gameId = gameId;
 	}
 
-	
 	public Player getPlayer1() {
 		return player1;
 	}
@@ -44,7 +40,6 @@ public class Room {
 		this.player2 = player2;
 	}
 
-	
 	public int getTarget() {
 		return target;
 	}
@@ -75,6 +70,14 @@ public class Room {
 
 	public void setCombinedNoMoveCount(int combinedNoMoveCount) {
 		this.combinedNoMoveCount = combinedNoMoveCount;
+	}
+
+	public boolean isOpen() {
+		return isOpen;
+	}
+
+	public void setOpen(boolean isOpen) {
+		this.isOpen = isOpen;
 	}
 
 }

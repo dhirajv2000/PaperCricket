@@ -33,6 +33,7 @@
     margin-left:95px;
     font-weight:800;
     font-size:0.8em;
+    cursor: pointer;
   } 
 
   form {
@@ -134,5 +135,80 @@ body{
     font-size: 80px;
     line-height: 230px;
   }
+  
+  .buttons-container button {
+  margin-bottom: 10px;
+  border: 1px solid blanchedalmond;
+  color: black; 
+  font-size: 30px;
+  height: 50px;
+  width:  50px;
+  text-align: center;
+  cursor: pointer;  
+  display: inline-block; 
+}
+}
+
+/* Table Style */
+
+#table-div {
+	display: none;
+}
+
+table{
+  background-color: white;
+  border-spacing: 0;
+  margin: 5px auto;
+}
+
+table .btn{
+	background:#2ecc71;
+    width:80px;
+    padding-top:5px;
+    padding-bottom:5px;
+    color:white;
+    border-radius:4px;
+    border: #27ae60 1px solid;
+    margin-top:20px;
+    margin-bottom:20px;
+    float:left;
+    margin-left:0px;
+    font-weight:800;
+    font-size:0.8em;
+    cursor: pointer;
+}
+
+thead{
+  background-color: #5089C6;
+  color: #1d293f;
+  font-weight: 700;
+}
+
+th{
+  padding: 7px;
+}
+
+tbody{
+  font-weight: 400;
+}
+
+td{
+  padding: 3px 25px;
+}
+
+.toggle-btn{
+  background: #155263;
+  color: white;
+  font-family: sans-serif;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;
+  line-height: 50px;
+  position: relative;
+  display: block;
+  height: 50px;
+  width: 200px;
+  margin: 2% auto;
+  border: 1px solid #fff; 
 }
   

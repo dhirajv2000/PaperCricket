@@ -1,5 +1,6 @@
 let gameView = new GameView();
 let tossView = new TossView();
+let roomDisplay = new RoomDisplay()
 
 window.addEventListener('resize', function() {
 	let buttonSection = document.getElementById('button-section');
@@ -13,8 +14,24 @@ window.addEventListener('resize', function() {
 		buttonSection.style.margin = "auto"; 
 		document.body.appendChild(buttonSection);
 	} else {
-		console.log(referenceNode.childNodes)
-		console.log(referenceNode.childNodes[4])
 		referenceNode.childNodes[4].parentNode.insertBefore(buttonSection, referenceNode.childNodes[4]);
 	}
+})
+
+window.onbeforeunload = function (event) {
+	return 'Do you really want to close ?';
+}
+
+window.onunload = function(event) {
+	if(!tossView.getGameId()) return;
+	 myWorker.postMessage([{
+	        "command" : "Quit Game",
+	        "gameId" : tossView.getGameId().toString()
+	    }]);
+}
+document.addEventListener("DOMContentLoaded", () => {
+	document.querySelector('.toggle-btn').addEventListener('click', roomDisplay.toggleTable);
+	 myWorker.postMessage([{
+	        "command" : "Get Rooms"
+	    }])
 })

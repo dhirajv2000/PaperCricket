@@ -1,8 +1,6 @@
 function GameView() {
     const self = this;
-    let gameId, innings, hasValidMove = false;
-    
-      
+    let gameId , innings, hasValidMove = false;
     
     //Sets up a new game
 //    this.loadNewGame = function (newGameId, firstInnings) {
@@ -154,6 +152,8 @@ function GameView() {
         }, 5000);
     }
     
+    
+    
     //Call Back function for run buttons
     this.callBack = function () {
         if (!hasValidMove) return;
@@ -174,4 +174,5 @@ function GameView() {
             document.querySelector('#' + "game-btn-" + index).addEventListener('click', self.callBack);
         }
     }
+    
 }
