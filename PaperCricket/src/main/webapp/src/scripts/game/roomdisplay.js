@@ -1,75 +1,84 @@
-function RoomDisplay() {
-    const self = this;
-	let thead, tbody;
-    const headings = ['Game Id', 'Join Button']
-	this.displayAll = function(roomList) {
-    	if(!document.querySelector('.table-div') && roomList.length !=0){
-    		let tableDiv = document.createElement('div');
-    		tableDiv.setAttribute('class', 'table-div');
-    		tableDiv.innerHTML = templates['roomTable'];
-    		tableDiv.style.display = "none";
-    		let referenceNode = document.querySelector('.toggle-btn');
-    		referenceNode.parentNode.insertBefore(tableDiv, referenceNode.nextSibling);
-    		thead = document.querySelector('thead');
-    	    tbody = document.querySelector('tbody');
-    		self.displayHeading();
-            self.displayRooms(roomList);
-    	} else{
-    		let tablediv = document.querySelector('.table-div');
-    		tablediv.parentNode.removeChild(tablediv);
-    		self.displayAll(roomList);
-    	}
-	}
+class RoomDisplay {
+    constructor() {
+        this.headings = ['Game Id', 'Join Button'];
+    }
 
-    this.displayRooms = function(roomList) {
-        for(let index = 0 ; index < roomList.length; index++){
+    displayAll(roomList) {
+        if (!document.getElementsByClassName('table-div')[0]) {
+            if (roomList.length == 0) return;
+            let tableDiv = document.createElement('div');
+            tableDiv.setAttribute('class', 'table-div');
+            tableDiv.innerHTML = templates['roomTable'];
+            tableDiv.style.display = "none";
+            let referenceNode = document.getElementsByClassName('toggle-btn')[0];
+            referenceNode.parentNode.insertBefore(tableDiv, referenceNode.nextSibling);
+            this.thead = document.getElementsByTagName('thead')[0];
+            this.tbody = document.getElementsByTagName('tbody')[0];
+            this.displayHeading();
+            this.displayRooms(roomList);
+        } else {
+            let tablediv = document.getElementsByClassName('table-div')[0];
+            tablediv.parentNode.removeChild(tablediv);
+            this.displayAll(roomList);
+        }
+    }
+    
+    //Displays Table body
+    displayRooms(roomList) {
+        for (let index = 0; index < roomList.length; index++) {
             const tr = document.createElement('tr');
-            for(let i = 0; i < 2; i++){
+            for (let i = 0; i < 2; i++) {
                 const td = document.createElement('td');
-                if(i==1) {
+                if (i == 1) {
                     const button = document.createElement('button');
-                    button.innerHTML = "Join"
+                    button.innerText = "Join"
                     button.setAttribute('class', 'btn');
                     button.setAttribute('id', roomList[index]);
-                    button.addEventListener('click', self.joinGame);
+                    button.addEventListener('click', this.joinGame);
                     td.appendChild(button);
                 } else {
-                    td.innerHTML = roomList[index]; 
+                    td.innerText = roomList[index];
                 }
                 tr.appendChild(td);
             }
-         tbody.appendChild(tr);
+            this.tbody.appendChild(tr);
         }
-    
-    }
 
-    this.displayHeading = function () {
+    }
+    
+    //Displays table header
+    displayHeading() {
         const tr = document.createElement('tr');
-        for(let index = 0; index < headings.length; index++){
+        for (let index = 0; index < this.headings.length; index++) {
             const th = document.createElement('th');
-            th.innerHTML = headings[index];
+            th.innerText = this.headings[index];
             tr.appendChild(th);
         }
-        thead.appendChild(tr);
+        this.thead.appendChild(tr);
     }
     
-    this.joinGame = function() {
-	    myWorker.postMessage([{"command": "Join Game", "gameId": this.id}]);
+    //Callback to join game
+    joinGame() {
+        myWorker.postMessage([{
+            "command": "Join Game",
+            "gameId": this.id
+        }]);
     }
     
-    this.toggleTable = function() {
-    	if(!document.querySelector('.table-div')){
-    		alert('No Rooms Available');
-    		return;
-    	}
-    	let rows = document.getElementsByTagName('tr');
-    	let tableDiv = document.querySelector('.table-div');
-    	if(rows.length == 0){
-    		alert('No Rooms Available')
-    	} else if(tableDiv.style.display == "block") {
-    		tableDiv.style.display = "none";
-    	} else {
-    		tableDiv.style.display = "block";
-    	}
+    //Hides/Shows table
+    toggleTable() {
+        if (!document.getElementsByClassName('table-div')[0]) {
+            alert('No Rooms Available');
+            return;
+        }
+        let rows = document.getElementsByTagName('tr');
+        let tableDiv = document.getElementsByClassName('table-div')[0];
+        if (rows.length == 0) {
+            alert('No Rooms Available')
+        } else if (tableDiv.style.display == "block") {
+            tableDiv.style.display = "none";
+        } else {
+            tableDiv.style.display = "block";
+        }
     }
 }

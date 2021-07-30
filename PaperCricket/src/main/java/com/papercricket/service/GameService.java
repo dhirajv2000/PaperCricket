@@ -84,9 +84,6 @@ public class GameService {
 	}
 
 	public static void createGame(GameController ctx) {
-//		if (RoomStorage.getRooms() != null) {
-//			RoomStorage.getRooms().forEach((k, v) -> System.out.println(k + " : " + v.getCurrentInnings()));
-//		}
 		String gameId = GenerateId.generateGameId();
 		Player player1 = new Player(ctx);
 		Room room = new Room(gameId);

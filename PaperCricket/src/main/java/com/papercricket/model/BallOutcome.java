@@ -47,8 +47,8 @@ public class BallOutcome {
 		}
 		if (room.getCombinedNoMoveCount() == 3) {
 			try {
-				batting.getGc().sendMessage(ResponseGenerator.terminateMatch("Match Termniated, Draw"));
-				bowling.getGc().sendMessage(ResponseGenerator.terminateMatch("Match Termniated, Draw"));
+				batting.getGc().sendMessage(ResponseGenerator.terminateMatch("Mt"));
+				bowling.getGc().sendMessage(ResponseGenerator.terminateMatch("Mt"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -146,28 +146,28 @@ public class BallOutcome {
 	public static void declareWinner(Player batting, Player bowling, Room room) {
 		String batsmenResult = null, bowlerResult = null;
 		if (batting.getWickets() == 5 && room.getBallsElapsed() < 30) {
-			bowlerResult = "You win !!!";
-			batsmenResult = "You lose";
+			bowlerResult = "Won";
+			batsmenResult = "Lost";
 		} else if (room.getBallsElapsed() == 30) {
 			if (batting.getScore() >= room.getTarget()) {
-				bowlerResult = "You lose";
-				batsmenResult = "You win !!!";
+				bowlerResult = "Lost";
+				batsmenResult = "Won";
 			} else if (batting.getScore() < room.getTarget()) {
-				bowlerResult = "You win !!!";
-				batsmenResult = "You lose";
+				bowlerResult = "Won";
+				batsmenResult = "Lost";
 			} else {
-				bowlerResult = "It's a draw";
-				batsmenResult = "It's a draw";
+				bowlerResult = "Draw";
+				batsmenResult = "Draw";
 			}
 		} else if (batting.getScore() >= room.getTarget()) {
-			bowlerResult = "You lose";
-			batsmenResult = "You win !!!";
+			bowlerResult = "Lost";
+			batsmenResult = "Won";
 		} else if (batting.getNoMoveCount() == 4) {
-			bowlerResult = "You win !!!";
-			batsmenResult = "You lose";
+			bowlerResult = "Won";
+			batsmenResult = "Lost";
 		} else if (bowling.getNoMoveCount() == 4) {
-			bowlerResult = "You lose";
-			batsmenResult = "You win !!!";
+			bowlerResult = "Lost";
+			batsmenResult = "Won";
 		}
 		try {
 			bowling.getGc().sendMessage(ResponseGenerator.declareResults(bowlerResult, batting.getScore(),

@@ -16,13 +16,14 @@ public class RequestHandler {
 		JSONArray array = new JSONArray(message);
 		JSONObject object = array.getJSONObject(0);
 		String command = object.getString("command");
-		if (command.equals("Run Played")) {
+		switch (command) {
+		case "Run Played":
 			int lastRun = Integer.parseInt(object.getString("run"));
 			String gameId = object.getString("gameId");
 			GameService.runPlayed(ctx, lastRun, gameId);
-			return;
-		}
-		if (command.equals("Get Rooms")) {
+			break;
+
+		case "Get Rooms":
 			try {
 				if (RoomMatcher.getAllRooms() != null) {
 					ctx.sendMessage(RoomMatcher.getAllRooms());
@@ -31,33 +32,36 @@ public class RequestHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		if (command.equals("New Game")) {
+			break;
+
+		case "New Game":
 			GameService.createGame(ctx);
-			return;
-		}
-		if (command.equals("Join Game")) {
-			String gameId = object.getString("gameId");
+			break;
+
+		case "Join Game":
 			try {
-				GameService.connectGame(ctx, gameId);
+				GameService.connectGame(ctx, object.getString("gameId"));
 			} catch (CustomException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			return;
-		}
-		if (command.equals("Coin Tossed")) {
+			break;
+
+		case "Coin Tossed":
 			GameService.handleToss(ctx, object.getString("chosenSide"), object.getString("gameId"));
-			return;
-		}
+			break;
 
-		if (command.equals("Innings Chosen")) {
+		case "Innings Chosen":
 			GameService.startGame(ctx, object.getString("chosenInnings"), object.getString("gameId"));
-			return;
-		}
+			break;
 
-		if (command.equals("Quit Game")) {
+		case "Quit Game":
 			GameService.quitGame(ctx, object.getString("gameId"));
+			break;
+
+		default:
+			System.out.println("Invalid Request");
+
 		}
 	}
 

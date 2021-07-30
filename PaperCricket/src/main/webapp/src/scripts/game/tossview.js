@@ -1,118 +1,134 @@
-function TossView() {
-    let self = this,
-        hasValidClick = false,
-        gameId, loadingTimer, timer;
+class TossView {
+
+    constructor() {
+        this.hasValidClick = false;
+    }
 
     //Displays Toss Screen
-    this.showTossScreen = function (message1, newGameId, message2 = null) {
-        gameId = newGameId
-        document.body.innerHTML = "";
+    showTossScreen(message1, newGameId, message2 = null) {
+        this.gameId = newGameId
+        document.body.innerText = "";
         document.body.innerHTML = templates['tossSection'];
         let textNode = document.createTextNode(message1);
         let spanNode = document.getElementById('loading-dots');
         spanNode.parentNode.insertBefore(textNode, spanNode);
-        if (message2) self.statusUpdate('countdown-box', message2);
-        loadingTimer = setInterval(function () {
+        if (message2) this.statusUpdate('countdown-box', message2);
+        this.loadingTimer = setInterval(function () {
             let dots = document.getElementById('loading-dots');
             if (dots.innerHTML.length == 3) {
-                dots.innerHTML = "";
+                dots.innerText = "";
             } else {
-                dots.innerHTML += ".";
+                dots.innerText += ".";
             }
         }, 500)
     }
 
     //Starts Toss when player 2 joins
-    this.startToss = function () {
-        clearInterval(loadingTimer)
-        self.statusUpdate('update-box', "Player 2 joined, chose Head or Tails");
-        self.statusUpdate('countdown-box', "")
+    startToss() {
+        clearInterval(this.loadingTimer)
+        this.statusUpdate('update-box', "Player 2 joined, chose Head or Tails");
+        this.statusUpdate('countdown-box', "")
         document.body.innerHTML += templates['coinButtons'];
-        hasValidClick = true;
-        self.startCountdown([{
+        this.hasValidClick = true;
+        this.startCountdown([{
             "command": "Coin Tossed",
             "chosenSide": "Head",
-            "gameId": gameId
+            "gameId": this.gameId
         }]);
-        document.getElementById("head-btn").addEventListener('click', self.coinEventHandler);
-        document.getElementById("tail-btn").addEventListener('click', self.coinEventHandler);
+        let self = this;
+        document.getElementById("head-btn").addEventListener('click', function () {
+            self.coinEventHandler(this.innerHTML)
+        });
+        document.getElementById("tail-btn").addEventListener('click', function () {
+        	self.coinEventHandler(this.innerHTML)
+        });
     }
 
     //Displays batting and bowling option to toss winner
-    this.handleTossResult = function (result, coinSide) {
+    handleTossResult(result, coinSide) {
         let tossResult = result;
+        clearInterval(this.loadingTimer)
         if (tossResult == "Won") {
-            hasValidClick = true;
-            document.body.innerHTML = "";
+            this.hasValidClick = true;
+            document.body.innerText = "";
             document.body.innerHTML = templates['tossSection'];
             document.body.innerHTML += templates['inningsButtons']
-            self.statusUpdate('update-box', coinSide + ", you won the toss, choose between:");
-            self.startCountdown([{
+            this.statusUpdate('update-box', coinSide + ", you won the toss, choose between:");
+            this.startCountdown([{
                 "command": "Innings Chosen",
                 "chosenInnings": "Batting",
-                "gameId": gameId
+                "gameId": this.gameId
             }]);
-            document.getElementById("bat-btn").addEventListener('click', self.inningsEventHandler);
-            document.getElementById("bowl-btn").addEventListener('click', self.inningsEventHandler);
+            let self = this;
+            document.getElementById("bat-btn").addEventListener('click', function() {
+            	self.inningsEventHandler(this.innerHTML);
+            });
+            document.getElementById("bowl-btn").addEventListener('click', function() {
+            	self.inningsEventHandler(this.innerHTML);
+            });
         } else {
-            document.body.innerHTML = "";
+            document.body.innerText = "";
             document.body.innerHTML = templates['tossSection'];
-            self.statusUpdate('update-box', coinSide + ", you lost the toss, waiting for opponent");
+            this.statusUpdate('update-box', coinSide + ", you lost the toss, waiting for opponent");
         }
     }
 
     //Starts the countdown for selectign the options
-    this.startCountdown = function (defaultPayload) {
+    startCountdown(defaultPayload) {
         let timerDuration = 10;
-        timer = setInterval(function () {
+        this.timer = setInterval(function () {
             if (timerDuration <= 0) {
-                clearInterval(timer);
-                hasValidMove = false;
-                document.getElementById("countdown-box").innerHTML = "Time Up";
-                clearInterval(loadingTimer);
+                clearInterval(this.timer);
+                this.hasValidMove = false;
+                document.getElementById("countdown-box").innerText = "Time Up";
+                clearInterval(this.loadingTimer);
                 myWorker.postMessage(defaultPayload);
-            } else if (hasValidClick == false) {
-                clearInterval(timer);
+            } else if (this.hasValidClick == false) {
+                clearInterval(this.timer);
             } else {
-                document.getElementById("countdown-box").innerHTML = "&nbsp;&nbsp;&nbsp;" + timerDuration;
+                document.getElementById("countdown-box").innerText = "   " + timerDuration;
             }
             timerDuration -= 1;
-        }, 1000);
+        }.bind(this), 1000);
     }
 
     //Event handler for innings buttons
-    this.inningsEventHandler = function () {
-        if (!hasValidClick) return;
-        hasValidClick = false;
-        document.getElementById("countdown-box").innerHTML = "";
-        clearInterval(timer);
-        clearInterval(loadingTimer);
-        let chosenInnings = this.innerHTML;
+    inningsEventHandler(clickedInnings) {
+        if (!this.hasValidClick) return;
+        this.hasValidClick = false;
+        document.getElementById("countdown-box").innerText = "";
+        clearInterval(this.timer);
+        clearInterval(this.loadingTimer);
+        let chosenInnings = clickedInnings
         myWorker.postMessage([{
             "command": "Innings Chosen",
             "chosenInnings": chosenInnings,
-            "gameId": gameId
-        }])
-    }
-    
-    this.getGameId = () => gameId;
-    
-    //Event handler for coin buttons
-    this.coinEventHandler = function () {
-        if (!hasValidClick) return;
-        hasValidClick = false;
-        document.getElementById("countdown-box").innerHTML = "";
-        clearInterval(timer);
-        let chosenSide = this.innerHTML;
-        myWorker.postMessage([{
-            "command": "Coin Tossed",
-            "chosenSide": chosenSide,
-            "gameId": gameId
+            "gameId": this.gameId
         }])
     }
 
-    this.statusUpdate = function (id, message) {
-        document.getElementById(id).innerHTML = message;
+    //Returns Game Id
+    getGameId() {
+        return this.gameId;
+    }
+
+    //Event handler for coin buttons
+    coinEventHandler(clickedSide) {
+        if (!this.hasValidClick) return;
+        this.hasValidClick = false;
+        document.getElementById("countdown-box").innerText = "";
+        clearInterval(this.timer);
+        let chosenSide = clickedSide;
+        myWorker.postMessage([{
+            "command": "Coin Tossed",
+            "chosenSide": chosenSide,
+            "gameId": this.gameId
+        }])
+    }
+
+    //Updates Status Bar
+    statusUpdate(id, message) {
+        document.getElementById(id).innerText = message;
     }
 
 }
